@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
 
             <!-- Name -->
@@ -18,6 +18,13 @@
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
+
+            <!-- Nick Name -->
+{{--            <div>--}}
+{{--                <x-label for="name" :value="__('Nick Name')" />--}}
+
+{{--                <x-input id="nickName" class="block mt-1 w-full" type="text" name="nick_name" :value="old('nick_name')" required autofocus />--}}
+{{--            </div>--}}
 
             <!-- Email Address -->
             <div class="mt-4">
@@ -45,7 +52,16 @@
                                 name="password_confirmation" required />
             </div>
 
+{{--                profile image--}}
+                <div class="mt-4">
+                    <x-label for="email" :value="__('Profile Image')" />
+
+{{--                    <x-input id="image" class="block mt-1 w-full" type="file" name="profile_image" :value="old('profile_image')" required />--}}
+                    <input type="file" name="profile_image" accept="image/*">
+                </div>
+
             <div class="flex items-center justify-end mt-4">
+                <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn btn-primary mr-3">Back</a>
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>

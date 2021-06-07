@@ -8,7 +8,11 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Image;
+
 
 class RegisteredUserController extends Controller
 {
@@ -19,6 +23,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        Session::put('previousUrl', url()->previous());
         return view('auth.register');
     }
 
@@ -36,18 +41,40 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'profile_image' => 'required',
         ]);
+
+        $imageURL = $this->userProfileImage($request);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profile_image' => $imageURL,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(Session::get('previousUrl'));
+//        return redirect(RouteServiceProvider::HOME);
+    }
+    public function userProfileImage ($request)
+    {
+        $image  = $request->profile_image;
+
+        if (!File::exists(public_path('/').'admin/user/profile-images'))
+        {
+            File::makeDirectory(public_path('/').'admin/user/profile-images', 0755, true, true);
+        }
+        $name   = 'admin/user/profile-images/'.str_replace(' ','-',time().'.'.$image->getClientOriginalExtension());
+        $resize = Image::make($image->getRealPath());
+        $resize->resize(230, null, function ($const) {
+            $const->aspectRatio();
+            $const->upsize();
+        });
+        $resize->save(public_path('/').$name);
+        return $name;
     }
 }

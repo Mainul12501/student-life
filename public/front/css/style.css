@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+.text-justify {
+    text-align: justify;
+}
+.text-orange {
+    color: orange!important;
+}
+.btn-orange {
+    background-color: orange;
+    color: white;
+}
+.bg-orange {
+    background-color: orange;
+}
+/*google fonts */
+.orelega-one {
+    font-family: 'Orelega One', cursive;
+}
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}
+.source-sans-pro {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+/* google font ends */
+.home-slider-img-size {
+    height: 800px;
+}
+.home-teachers-speech-img {
+    height: 300px;
+    /* width: 100%!important; */
+    width: 80%;
+}
+/* isotop img size */
+.isotope-img-size {
+    width: 300px;
+    height: 300px;
+    /* margin-left: 5px; */
+    /* margin-right: 5px; */
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.isotope-item-box .item {
+    margin-top: 50px;
+}
+
+/* home owl carousal img */
+.home-owl-carousal-img {
+    height: 230px;
+}
+/* footer */
+.big-footer {
+    background-color: #94a8bf;
+}
+.footer p {
+    margin-bottom: 0px;
+}
+/* student review section */
+.student-review-img {
+    height: 100px;
+    border-radius: 50%;
+}
+/* image gallary page */
+.gallary-img-size {
+    height: 230px;
+}
+
+/* user information page */
+.user-gallery-img {
+    height: 80px;
+    width: 80px;
+    margin: 4px;
+}
+.hidden {
+    display: none!important;
+}
+.user-info-bg {
+    background-color: #F2F5EA;
+}
+.show-me {
+    display: block;
+}
+.hide-me {
+    display: none;
+}
+/*user profile page bg*/
+.profile-bg {
+    background-image: url("../img/student-life-page-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
